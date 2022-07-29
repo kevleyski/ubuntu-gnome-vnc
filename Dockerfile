@@ -71,20 +71,6 @@ RUN apt update \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/* 
 
-
-# Hostname configuration
-RUN echo "mycontainer" | tee /etc/hostname > /dev/null
-RUN cat /etc/hostname
-RUN echo "127.0.0.1	localhost" | tee -a /etc/hosts > /dev/null
-RUN echo "127.0.0.1	mycontainer" | tee -a /etc/hosts > /dev/null
-RUN echo "# The following lines are desirable for IPv6 capable hosts" | tee -a /etc/hosts > /dev/null
-RUN echo "::1     ip6-localhost ip6-loopback" | tee -a /etc/hosts > /dev/null
-RUN echo "fe00::0 ip6-localnet" | tee -a /etc/hosts > /dev/null
-RUN echo "ff00::0 ip6-mcastprefix" | tee -a /etc/hosts > /dev/null
-RUN echo "ff02::1 ip6-allnodes" | tee -a /etc/hosts > /dev/null
-RUN echo "ff02::2 ip6-allrouters" | tee -a /etc/hosts > /dev/null
-RUN cat /etc/hosts
-
 # Autostart firefox (might not be the best way to do it, but it does the trick
 #RUN bash -c "echo "firefox" >> /.bashrc'
 

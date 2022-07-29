@@ -1,14 +1,21 @@
 #!/bin/bash
 
+PORT=5901
+#RES=2880x1800
+RES=1440x900
+
 build() {
 docker build -t ubuntu:18.04 .
 }
 
 run() {
-sudo docker run -it --rm -p 5901:5901 -e USER=klambert ubuntu:18.04 bash -c 'cat /home/klambert/.vnc/xstartup &&  vncserver :1 -geometry 1920x1080 -depth 24 && tail -F /home/klambert/.vnc/*.log'
+	sudo echo
+	#sudo docker run -it --rm -p $PORT:5901 -e USER=klambert ubuntu:18.04 bash -c 'cat /home/klambert/.vnc/xstartup && vncserver :1 -geometry 2880x1800 -depth 24 && tail -F /home/klambert/.vnc/*.log'
+	sudo nohup docker run -it --rm -p $PORT:5901 -e USER=klambert ubuntu:18.04 bash -c 'cat /home/klambert/.vnc/xstartup && vncserver :1 -geometry 1440x900 -depth 24 && tail -F /home/klambert/.vnc/*.log'
+	sudo tail -f nohup.out
 }
 
-echo "Connect to localhost:5901 password 1234
+echo "Connect to localhost:$PORT password 1234"
 
 #build
 run

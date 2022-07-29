@@ -88,29 +88,29 @@ RUN cat /etc/hosts
 # Autostart firefox (might not be the best way to do it, but it does the trick
 #RUN bash -c "echo "firefox" >> /.bashrc'
 
-RUN useradd -ms /bin/bash asap
-RUN usermod -aG sudo asap
-RUN echo "asap ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/asap \
-    && chmod 0440 /etc/sudoers.d/asap
+RUN useradd -ms /bin/bash klambert
+RUN usermod -aG sudo klambert
+RUN echo "klambert ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/klambert \
+    && chmod 0440 /etc/sudoers.d/klambert
 
 # RUN mkdir /root/.vnc
-RUN mkdir -p /home/asap/.vnc
+RUN mkdir -p /home/klambert/.vnc
 
 # Setup a password
 # RUN x11vnc -storepasswd 1234 /root/.vnc/passwd
-RUN x11vnc -storepasswd 1234 /home/asap/.vnc/passwd
+RUN x11vnc -storepasswd 1234 /home/klambert/.vnc/passwd
 
 # COPY xstartup /root/.vnc/xstartup
-COPY xstartup /home/asap/.vnc/xstartup
+COPY xstartup /home/klambert/.vnc/xstartup
 
 # RUN chmod 755 /root/.vnc/xstartup
-RUN chown -R asap:asap /home/asap/.vnc
-RUN chmod a+x /home/asap/.vnc/xstartup
-RUN ls -lart /home/asap/
+RUN chown -R klambert:klambert /home/klambert/.vnc
+RUN chmod a+x /home/klambert/.vnc/xstartup
+RUN ls -lart /home/klambert/
 
 #RUN bash -c 'echo " /usr/bin/Xvfb :0 -screen 0 1280x1024x24 -cc 4 -nolisten tcp -auth /var/gdm/:0.Xauth && service gdm3 start" >> /.bashrc'
 
-USER asap
-WORKDIR /home/asap
+USER klambert
+WORKDIR /home/klambert
 
 CMD ["bash"]
